@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proyecto Django</title>
+</head>
+<body>
+
+    {% include "barra.html" %}
+
+    <h1 style='color:red'>Hola Georgie, esta es tu primera plantilla con Django</h1>
+
+    {% if nombre_persona == 'Juanito' %}
+        <p>La persona que lee esto es el level brother maior</p>
+    {% else %}
+        <p>La persona que lee esto es el otro level brother, el chiquito adoptado</p>
+    {% endif %}
+
+    <p>El nombre del estudiante es: {{nombre_persona|upper}} {{apellido_persona.upper}}</p>
+    <p>Estamos viendo el tema de las plantillas a d&iacute;a {{momento_actual.day}}-{{momento_actual.month}}-{{momento_actual.year}}</p>
+    <p><strong>Temas del curso:</strong></p>
+    <!-- {{temas.1}}  Nomenclatura de punto para los elementos de la lista-->
+    <p>
+        <ul>
+            {% if temas %}
+                {% for tema in temas %}
+                    <li>{{tema|upper}}</li>
+                {% endfor %}
+            {% else %}
+                <p>No hay elementos que mostrar</p>
+            {% endif %}
+        </ul>
+    </p>
+</body>
+</html>
