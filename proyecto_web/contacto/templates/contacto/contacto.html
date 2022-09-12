@@ -4,10 +4,19 @@
 
 {% block content %}
 
-<div>
-    <p style="color: white;">
-        {{mi_formulario}}
-    </p>
+<div class="contenedorFormulario">
+
+    {% if "valido" in request.GET %}
+        <p style="color: white;">Información enviada correctamente, gracias</p>
+    {% endif %}
+
+    <form action="" method="POST" style="text-align: center;">
+        {% csrf_token %}
+        <table style="color: white; margin: 20px auto; text-align: left;">
+            {{mi_formulario.as_table}}
+        </table>
+        <input type="submit" value="Enviar" style="width:150px; margin-bottom:10px; text-align:center;">
+    </form>
 </div>
 
 {% endblock %}
