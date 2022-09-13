@@ -5,6 +5,9 @@
 {% block content %}
 
     <div class= "container">
+        <div style= "float:right;">
+            {% include "carro/widget.html" %}
+        </div>
         <div class= "row">
 
             {% for producto in productos %}
@@ -15,6 +18,9 @@
                             <h6 class="card-title">{{producto.nombre}}</h6>
                             <p class="card-text">$ {{producto.precio}}</p>
                         </div> <!--Cierra card body-->
+                        <div class= "card-footer text-center">
+                            <a href= "{% url 'carro:agregar' producto.id %}" class= "btn btn-success">Agregar al carro</a>
+                        </div><!--Cierra card footer-->
                     </div> <!--Cierra card-->
                 </div> <!--Cierra col-->
             {% endfor %}
