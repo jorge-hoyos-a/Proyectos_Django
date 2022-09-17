@@ -11,11 +11,11 @@ from django.core.mail import send_mail
 
 @login_required(login_url="/autenticacion/login_usuario")
 def procesar_pedido(request):
-    pedido = Pedido.objects.create(user=request.user)
-    carro = Carro(request)
-    lineas_pedido = list()
-    for key, value in carro.carro.items():
-        lineas_pedido.appended(Linea_Pedido(
+    pedido = Pedido.objects.create(user=request.user)   # Damos de alta un pedido
+    carro = Carro(request)  # Cogemos el carro
+    lineas_pedido = list()  # Lista con los pedidos para recorrer los elementos del carro
+    for key, value in carro.carro.items(): #Recorremos el carro con sus items
+        lineas_pedido.append(Linea_Pedido(
             producto_id = key, 
             cantidad = value["cantidad"],
             user = request.user,
@@ -23,7 +23,7 @@ def procesar_pedido(request):
         ))
         
         # Guardar los datos del pedido en la tabla correspondiente en la bbdd
-    Linea_Pedido.objects.bulk_create()
+    Linea_Pedido.objects.bulk_create(lineas_pedido) # Crea registros en BBDD en paquete
     
     enviar_mail(
         pedido= pedido,
